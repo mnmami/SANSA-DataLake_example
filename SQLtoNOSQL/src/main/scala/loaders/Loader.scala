@@ -11,7 +11,6 @@ case class Loader(configFile: String) {
         val spark = SparkSession.builder.master("local[*]").appName("SQL dump to NoSQL Loader").getOrCreate;
         spark.sparkContext.setLogLevel("ERROR")
 
-
         val sql = spark.sparkContext.textFile(inputPath)
 
         val lines = sql.filter(_.contains("INSERT INTO"))
@@ -36,12 +35,11 @@ case class Loader(configFile: String) {
 
         val offersDF = spark.createDataFrame(rowRDD, schema)
 
-		offersDF.show()
+		    offersDF.show()
 
         offersDF.write.format("com.mongodb.spark.sql").option("uri", "mongodb://" + url + "/" + database + "." + collection).mode("overwrite").save()
 
-
-		spark.stop()
+		    spark.stop()
     }
 
 	def product(inputPath: String, keyspace: String, table: String) {
@@ -85,6 +83,8 @@ case class Loader(configFile: String) {
         import org.apache.spark.sql.cassandra._
 
         productsDF.write.format("org.apache.spark.sql.cassandra").options(Map("table" -> table, "keyspace" -> keyspace)).save()
+
+        spark.stop()
     }
 
 	   def person(inputPath: String, header: String, delimiter: String, mode: String, outputFile: String) {
@@ -116,6 +116,8 @@ case class Loader(configFile: String) {
         val personsDF = spark.createDataFrame(rowRDD, schema)
 
         personsDF.write.option("header","true").csv(outputFile)
+
+        spark.stop()
     }
 
     def review(inputPath: String, outputFile: String) {
@@ -153,6 +155,8 @@ case class Loader(configFile: String) {
         val reviewsDF = spark.createDataFrame(rowRDD, schema)
 
         reviewsDF.write.parquet(outputFile)
+
+        spark.stop()
     }
 
 }

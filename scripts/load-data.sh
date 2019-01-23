@@ -25,7 +25,7 @@ mvn exec:java -X -Dexec.args="/root/data/input/08Offer.sql Offer /usr/local/SANS
 # chown -R mysql:mysql /var/lib/mysql /var/run/mysqld
 /etc/init.d/mysql start
 
-cd  /root/bsbmtools-0.2/data
+cd  /root/data/input
 mysql -u root --password=root mysql < 03Producer.sql
 
 bash /root/welcome.sh
