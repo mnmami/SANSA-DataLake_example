@@ -4,12 +4,12 @@ mongod &> /dev/null &
 echo "Hi, MongoDB and Cassandra are starting..."
 
 # Preprocess data: take values from SQL dump into the sources
-mvn clean install -f /usr/local/SANSA-DataLake_example/scripts/SQLtoNOSQL/pom.xml
+mvn clean install -f /usr/local/SANSA-DataLake_example/SQLtoNOSQL/pom.xml
 echo "***************************Loading data to CSV***************************"
-mvn exec:java -f /usr/local/SANSA-DataLake_example/scripts/SQLtoNOSQL/pom.xml -X -Dexec.args="/root/data/input/09Person.sql Person /usr/local/SANSA-DataLake_example/input_files/config"
+mvn exec:java -f /usr/local/SANSA-DataLake_example/SQLtoNOSQL/pom.xml -X -Dexec.args="/root/data/input/09Person.sql Person /usr/local/SANSA-DataLake_example/input_files/config"
 
 echo "***************************Loading data to Parquet***********************"
-mvn exec:java -f /usr/local/SANSA-DataLake_example/scripts/SQLtoNOSQL/pom.xml -X -Dexec.args="/root/data/input/10Review.sql Review /usr/local/SANSA-DataLake_example/input_files/config"
+mvn exec:java -f /usr/local/SANSA-DataLake_example/SQLtoNOSQL/pom.xml -X -Dexec.args="/root/data/input/10Review.sql Review /usr/local/SANSA-DataLake_example/input_files/config"
 
 echo "***************************Preparing Cassandra DB************************"
 cqlsh -e "CREATE KEYSPACE db WITH replication = {'class': 'SimpleStrategy', 'replication_factor': '1'}  AND durable_writes = true;"

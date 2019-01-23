@@ -55,7 +55,7 @@
 
 <#ReviewMapping>
 	rml:logicalSource [
-		rml:source "src/main/resources/Data/Output/review.parquet";
+		rml:source "/root/data/input/review.parquet";
 		nosql:store nosql:parquet
 	];
 	rr:subjectMap [
@@ -130,7 +130,7 @@
 
 <#PersonMapping>
 	rml:logicalSource [
-		rml:source "src/main/resources/Data/Output/person.csv";
+		rml:source "/root/data/input/person.csv";
 		nosql:store nosql:csv
 	];
 	rr:subjectMap [
