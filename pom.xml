@@ -23,7 +23,7 @@
     <scala.compat.version>2.11</scala.compat.version>
     <spark.version>2.4.0</spark.version>
 		<jena.version>3.9.0</jena.version>
-		<sansa.query.version>0.5.1-SNAPSHOT</sansa.query.version>
+		<sansa.query.version>0.5.0</sansa.query.version>
   </properties>
 
   	<dependencies>
