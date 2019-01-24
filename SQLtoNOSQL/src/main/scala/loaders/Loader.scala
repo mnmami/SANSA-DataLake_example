@@ -158,5 +158,4 @@ case class Loader(configFile: String) {
 
         spark.stop()
     }
-
 }
