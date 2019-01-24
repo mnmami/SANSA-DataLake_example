@@ -70,7 +70,8 @@ RUN set -x && \
     cd /usr/local && \
     git clone https://github.com/mnmami/SANSA-DataLake_example.git && \
     cd SANSA-DataLake_example && \
-    cp /usr/local/SANSA-DataLake_example/input_files/* /root/input && \
+    mkdir /root/input /root/scripts && \
+    cp -r /usr/local/SANSA-DataLake_example/input_files/* /root/input && \
     cp /usr/local/SANSA-DataLake_example/scripts/* /root/scripts && \
     mvn package
 
@@ -78,7 +79,9 @@ RUN set -x && \
 RUN set -x && \
     # Install Squerall-GUI
     git clone https://github.com/EIS-Bonn/squerall-gui.git && \
-    mv squerall-gui /usr/local
+    mv squerall-gui /usr/local && \
+    wget http://central.maven.org/maven2/org/apache/parquet/parquet-tools/1.8.0/parquet-tools-1.8.0.jar && \
+    mv parquet-tools-1.8.0.jar /usr/local/lib
 
 EXPOSE 9000
 
