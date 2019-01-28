@@ -29,5 +29,3 @@ cd  /root/data/input
 mysql -u root --password=root mysql < 03Producer.sql
 
 cd /usr/local/squerall-gui; sbt "run"; cd -
-
-bash /root/welcome.sh
