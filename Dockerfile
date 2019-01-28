@@ -72,7 +72,7 @@ RUN set -x && \
     cd SANSA-DataLake_example && \
     mkdir /root/input /root/scripts && \
     cp -r /usr/local/SANSA-DataLake_example/input_files/* /root/input && \
-    cp /usr/local/SANSA-DataLake_example/scripts/* /root/scripts && \
+    cp scripts/* /root/scripts && \
     mvn package
 
 # Get Squerall GUIs
@@ -86,9 +86,15 @@ RUN set -x && \
 EXPOSE 9000
 
 # Run welcome script
-RUN echo "\nbash /root/scripts/welcome.sh\n" >> /root/.profile
+# RUN "bash /root/scripts/load-data.sh"
 
-CMD ["/bin/bash","--login"]
+RUN ["chmod", "+x", "/root/scripts/load-data.sh"]
+
+RUN pwd
+
+# RUN "/root/scripts/load-data.sh"
+
+CMD /root/scripts/load-data.sh
 
 #RUN [“chmod”, “+x”, "/root/welcome-script.sh”]
 #CMD /root/welcome-script.sh
